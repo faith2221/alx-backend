@@ -25,7 +25,7 @@ class Server:
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
-    def__init__(self):
+    def __init__(self):
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -33,7 +33,7 @@ class Server:
         Cached dataset.
         """
         if self.__dataset is None:
-            with open(self.DATA-FILE) as f:
+            with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
