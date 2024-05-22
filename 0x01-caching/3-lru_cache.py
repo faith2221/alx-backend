@@ -20,23 +20,21 @@ class LRUCache(BaseCaching):
         """
         Add data to cache and or delete it lru.
         """
-        if key is None or item is None:
-            pass
-        else:
-            size = len(self.cache_data)
-            if size >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
-                print("DISCARD: {}".format(self.order[-1]))
-                del self.cache_data[self.order[-1]]
-                del self.order[-1]
-            if key in self.order:
-                del self.order[self.order.index(key)]
+        if key and item:
+            if self.cache_data.get(key):
+                self.queue.remove(key)
+            self.queue.append(key)
             self.cache_data[key] = item
-            self.order.append(key)
+            if len(self.queue) > self.MAX_ITEMS:
+                delete = self.queue.pop(0)
+                self.cache_data.pop(delete)
+                print('DISCARD: {}'.format(delete))
 
     def get(self, key):
         """
         Return the value in self.cache_data linked to key.
         """
-        if key is not None and key in self.cache_data.keys():
-            return self.cache_data.get(key)
-        return None
+        if self.cache_data.get(key):
+            self.queue.remove(key)
+            self.queue.append(key)
+        return self.cache_data.get(key)
