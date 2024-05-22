@@ -14,7 +14,7 @@ class LRUCache(BaseCaching):
         Initialize.
         """
         super().__init__()
-        self.usage = []
+        self.order = []
 
     def put(self, key, item):
         """
@@ -27,13 +27,11 @@ class LRUCache(BaseCaching):
             if size >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
                 print("DISCARD: {}".format(self.order[-1]))
                 del self.cache_data[self.order[-1]]
-                del self.usage[-1]
-            if key in self.usage:
-                del self.usage[self.usage.index(key)]
-            if key in self.usage:
-                del self.usage[self.usage.index(key)]
-            self.cache_data[ke] = item
-            self.usage.append(key)
+                del self.order[-1]
+            if key in self.order:
+                del self.order[self.order.index(key)]
+            self.cache_data[key] = item
+            self.order.append(key)
 
     def get(self, key):
         """
