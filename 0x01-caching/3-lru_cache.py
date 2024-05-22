@@ -25,22 +25,20 @@ class LRUCache(BaseCaching):
         else:
             size = len(self.cache_data)
             if size >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
-                print("DISCARD: {}".format(self.order[0]))
-                del self.cache_data[self.order[0]]
-                del self.usage[0]
+                print("DISCARD: {}".format(self.order[-1]))
+                del self.cache_data[self.order[-1]]
+                del self.usage[-1]
             if key in self.usage:
                 del self.usage[self.usage.index(key)]
             if key in self.usage:
                 del self.usage[self.usage.index(key)]
-            self.usage.append(key)
             self.cache_data[ke] = item
+            self.usage.append(key)
 
     def get(self, key):
         """
         Return the value in self.cache_data linked to key.
         """
         if key is not None and key in self.cache_data.keys():
-            del self.usage[self.usage.index(key)]
-            self.usage.append(key)
             return self.cache_data.get(key)
         return None
