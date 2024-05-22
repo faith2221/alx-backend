@@ -37,6 +37,6 @@ class LRUCache(BaseCaching):
         """
         Return the value in self.cache_data linked to key.
         """
-        if key is not None and key in sself.cache_data.keys():
+        if key is not None and key in self.cache_data.keys():
             return self.cache_data.get(key)
         return None
