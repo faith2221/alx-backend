@@ -14,6 +14,7 @@ class LIFOCache(BaseCaching):
         Initialize.
         """
         super().__init__()
+        self.order = []
 
     def put(self, key, item):
         """
@@ -23,11 +24,13 @@ class LIFOCache(BaseCaching):
             pass
         else:
             size = len(self.cache_data)
-            if size >= BaseCaching.MAX_ITEMS:
-                first_key = next(iter(self.cache_data))
-                self.cache_data.pop(first_key)
-                print('DISCARD: {}'.format(first_key))
-
+            if size >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                print("DISCARD: {}".format(self.order[-1]))
+                del self.cache_data[self.order[-1]]
+                del self.order[-1]
+            if key in self.order:
+                del self.order[self.order.index(key)]
+            self.order.append(key)
             self.cache_data[key] = item
 
     def get(self, key):
@@ -35,5 +38,5 @@ class LIFOCache(BaseCaching):
         Return the value in self.cache_data linked to key.
         """
         if key is None or key not in self.cache_data.keys():
-            return None
-        return self.cache_data.get(key)
+            return self.cache_data.(key)
+        return None
