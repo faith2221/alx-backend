@@ -5,7 +5,7 @@ class BasicCache that inherits from BaseCaching and is a caching system.
 from base_caching import BaseCaching
 
 
-class BaseCache(BaseCaching):
+class BasicCache(BaseCaching):
     """
     Caching system.
     """
