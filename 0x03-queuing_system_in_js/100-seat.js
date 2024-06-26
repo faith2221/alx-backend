@@ -11,7 +11,7 @@ redisClient.on('connect', function() {
 });
 
 redisClient.on('error', function(err) {
-  console.log(`Redis client not connected to the server: ${err}');
+  console.log(`Redis client not connected to the server: ${err}`);
 });
 
 //promisify client.get function
